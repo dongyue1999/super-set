@@ -1,0 +1,27 @@
+{% extends 'appbuilder/init.html' %}
+{% import 'appbuilder/baselib.html' as baselib %}
+{% block body %}
+    {% include 'appbuilder/general/confirm.html' %}
+    {% include 'appbuilder/general/alert.html' %}
+    {% block navbar %}
+        <header class="top" role="header">
+            {% include 'appbuilder/navbar.html' %}
+        </header>
+    {% endblock %}
+    <div style="width: 98%;margin:auto">
+        {% block messages %}
+            {% include 'appbuilder/flash.html' %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+
+    </div>
+    {% block footer %}
+        <footer>
+            <div style="width: 100%">
+                {% include 'appbuilder/LoginFooter.html' %}
+            </div>
+        </footer>
+    {% endblock %}
+
+{% endblock %}
