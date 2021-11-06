@@ -3,107 +3,100 @@
 {% block navbar %}
     <img src="/static/assets/images/superset-logo-horiz.png" width="100" style="margin-top: 10px">
 {% endblock %}
-
+{## TODO ：响应布局#}
 {% block content %}
-
     <style>
-        body {background-image:url("/static/assets/images/bj.jpg");
-        }
+        {#    #TODO : CSS 样式文件抽取没做 #}
+        {#body {background-image:url("/static/assets/images/bj.jpg");#}
+        {#}#}
         .section-3{
             margin-bottom: 5px;
         }
         .my-icon{
-            color: white;
+            color: black;
         }
         .my-title{
             font-style: oblique;
-            font-weight: bold
+            font-weight: bold;
+            margin-bottom: 2%;
+            margin-top: 5%;
+        }
+        .my-header{
+            background-image: url("/static/appbuilder/img/u15.png");
+            width: 100%;
+            height: 50vh;
+            background-size:cover
         }
     </style>
-
-
     <!-- Save for Web Slices (登录源文件.psd) -->
-    <div class="row">
-        <form class="form" action="" method="post" name="login">
-            {{form.hidden_tag()}}
-            <table id="__01" width="1000" height="583.46" border="0" cellpadding="0" cellspacing="0" style="margin-top:60px;margin-left: 80px"><!-- margin:10% 0 0 3%-->
-                <tr>
-                    <td rowspan="3">
-                        <img src="/static/assets/images/01.jpg" width="553.85" height="583.46" alt=""></td>
-                    <td>
-                        <img src="/static/assets/images/02.jpg" width="446.15" height="211.15" alt=""></td>
-                </tr>
-                <tr>
-                    <td>
-                        <!--<img src="images/&#x767b;&#x5f55;&#x6e90;&#x6587;&#x4ef6;_03.jpg" width="580" height="216" alt="">-->
-                        <div class="control-group{% if form.errors.openid is defined %} error{% endif %}" style="width:446.15px; height:140.77px;background:#ffffff;">
-                            <!--<label class="control-label" for="openid">{{_("Username")}}:</label>-->
-
-                            <div class="controls" style="margin:auto;width:400px;left:60px;">
-                                <label class="control-label" for="openid" >账号：</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    {{ form.username(size = 80, class = "form-control", autofocus = true) }}
-                                </div>
-                                {% for error in form.errors.get('openid', []) %}
-                                    <span class="help-inline">[{{error}}]</span><br>
-                                {% endfor %}
-                                <!--<label class="control-label" for="openid">{{_("Password")}}:</label>-->
-                                <label class="control-label" for="openid">密码：</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                    {{ form.password(size = 80, class = "form-control") }}
-                                </div>
-                                {% for error in form.errors.get('openid', []) %}
-                                    <span class="help-inline">[{{error}}]</span><br>
-                                {% endfor %}
-                            </div>
+    <div class="my-header row flex-row-reverse" >
+        <div class="col-2"></div>
+        <div class="col-2 align-self-center " style="height: 80%">
+            <div class="card " style="height: 100%;">
+                <form  action="" method="post" name="login" >
+                    {{form.hidden_tag()}}
+                    <div class="card-title text-center fs-2 fw-bold pt-5">
+                        全拓数据
+                    </div>
+                    <div class="card-body {% if form.errors.openid is defined %} error{% endif %} ">
+                        <div
+                                class="row g-3 align-items-center justify-content-center"
+                        >
+                            <input  id="username" name="username"  class="form-control col-auto" style="width: 80%"  placeholder="用户名" />
+                            {% for error in form.errors.get('openid', []) %}
+                                <span class="help-inline">[{{error}}]</span><br>
+                            {% endfor %}
+                            <input  style="width: 80%" id="password" name="password" type="password" required placeholder="密码"/>
+                            {% for error in form.errors.get('openid', []) %}
+                                <span class="help-inline">[{{error}}]</span><br>
+                            {% endfor %}
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <!--<img src="images/&#x767b;&#x5f55;&#x6e90;&#x6587;&#x4ef6;_04.jpg" width="580" height="223" alt="">-->
-                        <div class="control-group" style="width:446.15px; height:231.54px;background:#ffffff">
-                            <div class="controls" >
-                                <br>
-                                <div style="margin: auto;width:400px;left:60px;">
-                                    <!--<input class="btn btn-primary btn-block" type="submit" value="{{_('Sign In')}}">-->
-                                    <input class="btn btn-primary btn-block" type="submit" value="登 录---" >
-                                    {% if appbuilder.sm.auth_user_registration %}
-                                        <a href="{{appbuilder.sm.get_url_for_registeruser}}" class="btn btn-block btn-primary" data-toggle="tooltip" rel="tooltip"
-                                           title="{{_('If you are not already a user, please register')}}">
-                                            {{_('Register')}}
-                                        </a>
-                                    {% endif %}
-                                </div>
-                            </div>
+                    </div>
+                    <div >
+                        <div class="d-flex flex-row-reverse " style="width: 80%" >
+                            <a href="">忘记密码</a>
                         </div>
-                    </td>
-                </tr>
-            </table>
-
-        </form>
+                        <div class="d-flex justify-content-center p-1" >
+                            <!--<input class="btn btn-primary btn-block" type="submit" value="{{_('Sign In')}}">-->
+                            <button class="btn btn-success" type="submit" style="width: 80%" >登录</button>
+                            {% if appbuilder.sm.auth_user_registration %}
+                                <a href="{{appbuilder.sm.get_url_for_registeruser}}" class="btn btn-block btn-primary" data-toggle="tooltip" rel="tooltip"
+                                   title="{{_('If you are not already a user, please register')}}">
+                                    {{_('Register')}}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <h2 class="d-flex justify-content-center  text-dark my-title" >产品架构</h2>
+
+    <h2 class="d-flex justify-content-center  text-dark my-title " >产品架构</h2>
+    <div class="d-flex justify-content-center">
+        <img src="https://d1icd6shlvmxi6.cloudfront.net/gsc/KBZ5IY/60/2b/94/602b94210abc4e3fb0469f40797ae312/images/%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2/u30.png?token=9ea997125d56869eedbe2f3d9b702ac46aa23f621de2b1417698a010d06e973c"
+             class="img-fluid"
+        >
+        {#    #TODO : 代码有点冗余，待完善;图标没换 #}
+    </div>
     <h2 class="d-flex justify-content-center   text-dark my-title" >产品功能</h2>
     <div class="d-flex justify-content-evenly row ">
         <div class="m-3 col">
-            <div><i class="fa fa-3x fa-pencil fa-light" style="color: white"></i></div>
+            <div><i class="fa fa-3x fa-pencil fa-light my-icon" ></i></div>
             <span class="icon-bar mt-3">数字决策</span>
             <div class="mt-3 ">
                 科学融合各类算法模型，深层次挖掘数据价值，洞悉业务指标规律，让决策更加科学化、智能化
             </div>
         </div>
         <div class="m-3 col">
-            <div><i class="fa fa-3x fa-desktop fa-lightbulb-o" style="color: white"></i></div>
+            <div><i class="fa fa-3x fa-desktop fa-lightbulb-o my-icon" ></i></div>
             <span class="icon-bar mt-3">多种终端展示</span>
             <div class="mt-3 ">
                 科学融合各类算法模型，深层次挖掘数据价值，洞悉业务指标规律，让决策更加科学化、智能化
             </div>
         </div>
         <div class="m-3 col">
-            <div><i class="fa fa-3x fa-heart icon-with" style="color: white"></i></div>
+            <div><i class="fa fa-3x fa-heart  my-icon" s></i></div>
             <span class="icon-bar ">可视化分析</span>
             <div class="mt-3 ">
                 构建无需编程的数据分析体系，结合科学算法分析、预测数据趋势，让运营决策更可靠
@@ -112,22 +105,22 @@
     </div>
     <div class="d-flex justify-content-evenly row">
         <div class="m-3 col">
-            <div><i class="fa fa-3x fa-pencil fa-light" style="color: white"></i></div>
+            <div><i class="fa fa-3x fa-pencil fa-light my-icon" ></i></div>
             <span class="icon-bar mt-3">多种查询模式</span>
             <div class="mt-3  ">
                 可视化查询拖拽模式，SQL查询coding模式，用户可按习惯自有进行数据查询.赋能产业业务
             </div>
         </div>
         <div class="m-3 col" >
-            <div><i class="fa fa-3x fa-desktop fa-lightbulb-o" style="color: white"></i></div>
-            <span class="icon-bar mt-3">多种终端展示</span>
+            <div><i class="fa fa-3x fa-desktop fa-lightbulb-o my-icon" ></i></div>
+            <span class="icon-bar mt-3">无缝对接数据</span>
             <div class="mt-3 ">
                 数据对接灵活配置，支持多种数据库、文本文件等数据源类型，扩充数据边界，增强数据视野
             </div>
         </div>
         <div class="m-3 col">
-            <div><i class="fa fa-3x fa-heart " style="color: white"></i></div>
-            <span class="icon-bar ">可视化分析</span>
+            <div><i class="fa fa-3x fa-heart my-icon " ></i></div>
+            <span class="icon-bar ">高效数据整合</span>
             <div class="mt-3 ">
                 可视化建模，高效能完成数据连接、提取、加工等数据整合工作，并提供多样化的数据运维策略
             </div>
